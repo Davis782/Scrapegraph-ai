@@ -9,7 +9,7 @@ from scrapegraphai.utils import prettify_exec_info
 
 graph_config = {
     "llm": {
-        "model": "ollama/llama3",
+        "model": "ollama/llava-llama3",
         "temperature": 0,
         "format": "json",  # Ollama needs the format to be specified explicitly
         # "base_url": "http://localhost:11434", # set ollama URL arbitrarily
@@ -41,4 +41,4 @@ print(result)
 # ************************************************
 
 graph_exec_info = smart_scraper_graph.get_execution_info()
-print(prettify_exec_info(graph_exec_info))
+print(prettify_exec_info(complete_result=graph_exec_info))
