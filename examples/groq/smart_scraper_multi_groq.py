@@ -1,8 +1,10 @@
-""" 
+"""
 Basic example of scraping pipeline using SmartScraper
 """
 
-import os, json
+import os
+import json
+
 from dotenv import load_dotenv
 from scrapegraphai.graphs import SmartScraperMultiGraph
 
@@ -12,7 +14,8 @@ load_dotenv()
 # Define the configuration for the graph
 # ************************************************
 
-groq_key = os.getenv("GROQ_APIKEY")
+groq_key = os.getenv(
+    key="GROQ_API_KEY")
 
 graph_config = {
     "llm": {
@@ -20,7 +23,7 @@ graph_config = {
         "api_key": groq_key,
         "temperature": 0
     },
-     "embeddings": {
+    "embeddings": {
         "model": "ollama/nomic-embed-text",
         "temperature": 0,
         # "base_url": "http://localhost:11434",  # set ollama URL arbitrarily
@@ -33,14 +36,15 @@ graph_config = {
 # *******************************************************
 
 multiple_search_graph = SmartScraperMultiGraph(
-    prompt="Who is Marco Perini?",
-    source= [
-        "https://perinim.github.io/",
-        "https://perinim.github.io/cv/"
-        ],
+    prompt="Scrape the website for any data you can get in a .json format.",
+    source=[
+        # "https://perinim.github.io/",
+        # "https://perinim.github.io/cv/",
+        " https://disclosures-clerk.house.gov/foreign-reports/2024q1jan09.pdf",
+    ],
     schema=None,
     config=graph_config
 )
 
 result = multiple_search_graph.run()
-print(json.dumps(result, indent=4))
+print(json.dumps(obj=result, indent=4))
